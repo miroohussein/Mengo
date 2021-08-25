@@ -1,0 +1,4 @@
+#Wed Aug 25 17:04:50 EET 2021
+base.0=C\:\\Users\\CRIZMA MEGA STORE\\Documents\\GitHub\\Mengo\\mengo\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
