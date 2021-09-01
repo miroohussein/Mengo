@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mengo/colors/colors.dart';
+import 'package:mengo/ui/profile/profile.dart';
+
+
 void main() {
-  runApp(Mengo());
+  runApp(MaterialApp(debugShowCheckedModeBanner: false,
+      home: Profile()));
 }
 
 class Mengo extends StatelessWidget {
