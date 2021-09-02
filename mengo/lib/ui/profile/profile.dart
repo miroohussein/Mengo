@@ -157,74 +157,40 @@ class _ProfileState extends State<Profile> {
                                                onPressed:(){},
                                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                                child: Text("   English  ",style: TextStyle(color: Colors.white,),textAlign:TextAlign.center,)
-                                           ),
-    ],
-                                       ),
-                                     ),
+                                           )],),),],),),),),
+                                               Container(
+                                                       margin: const EdgeInsets.fromLTRB(0, 50, 0, 450),
+                                                    child: imageProfile()
+                                                ),],),);
+                                }
+                                Widget imageProfile(){
+                                  return Center(
+                                    child: Stack(
+                                      children: [CircleAvatar(radius: 50,backgroundImage: AssetImage("assets/gallery.png") ,),
+                                      Positioned(bottom:5,right:10,
+                                        child: InkWell(onTap: (){ showModalBottomSheet(context: context, builder:(builder)=>bottomSheet(),);},
+                                             child: Icon(Icons.camera_alt,color: MengoColors.mainOrange,size: 28,),),),
+                                      ],
+
+                                    ),
+                                  );
 
 
+                                }
+                                Widget bottomSheet(){
+                                  return Container(
+                                    height:150,
+                                    width: MediaQuery.of(context).size.width,
+                                    margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
+                                    child: Column(
 
-                  ],
-                    ),
-
-
-                  ),
-                ),),
-                Container(
-                       margin: const EdgeInsets.fromLTRB(0, 50, 0, 450),
-                    child: imageProfile()
-                ),
-
-
-
-
-
-
-
-              ],
-
-
-
-
-
-            )
-      ,
-
-
-
-
-
-
-    );
-  }
-  Widget imageProfile(){
-    return Center(
-      child: Stack(
-        children: [CircleAvatar(radius: 50,backgroundImage: AssetImage("assets/gallery.png") ,),
-        Positioned(bottom:5,right:10,
-          child: InkWell(onTap: (){ showModalBottomSheet(context: context, builder:(builder)=>bottomSheet(),);},
-               child: Icon(Icons.camera_alt,color: MengoColors.mainOrange,size: 28,),),),
-        ],
-
-      ),
-    );
-
-
-  }
-  Widget bottomSheet(){
-    return Container(
-      height:150,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
-      child: Column(
-
-       children:[ Text("Choose Profile Photo",style: TextStyle(fontSize: 20,),),
-        SizedBox(height: 20,),
-        Row(mainAxisAlignment: MainAxisAlignment.center,children: [
-           FlatButton.icon(onPressed: (){}, icon: Icon(Icons.camera), label: Text("Camera"),),
-          FlatButton.icon(onPressed: (){}, icon: Icon(Icons.image), label: Text("gallery"),),
-         ],),
-      ],),
-    );
-  }
-}
+                                     children:[ Text("Choose Profile Photo",style: TextStyle(fontSize: 20,),),
+                                      SizedBox(height: 20,),
+                                      Row(mainAxisAlignment: MainAxisAlignment.center,children: [
+                                         FlatButton.icon(onPressed: (){}, icon: Icon(Icons.camera), label: Text("Camera"),),
+                                        FlatButton.icon(onPressed: (){}, icon: Icon(Icons.image), label: Text("gallery"),),
+                                       ],),
+                                    ],),
+                                  );
+                                }
+                              }
