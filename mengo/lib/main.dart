@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mengo/colors/colors.dart';
 import 'package:mengo/ui/logo/logoPage.dart';
 import 'package:mengo/ui/profile/profile.dart';
+import 'package:mengo/ui/project/project.dart';
 import 'package:mengo/ui/templates/templates.dart';
 
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false,
-      home: Templates()));
+      home: Project()));
 }
 
 class Mengo extends StatelessWidget {
