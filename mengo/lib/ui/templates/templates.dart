@@ -59,27 +59,30 @@ class _TemplatesState extends State<Templates> {
 
             margin: const EdgeInsets.fromLTRB(0, 100, 0, 20),
             width: 380,height: 600,
-            decoration: BoxDecoration(color: Color(0xFFFFEFA5),border: Border.all(color:MengoColors.mainOrange,width: 4)
+            decoration: BoxDecoration(borderRadius:BorderRadius.circular(20),color: Colors.white,border: Border.all(color:MengoColors.mainOrange,width: 4,)
 
     ),
              child: GridView.count(
                crossAxisCount:2,
-               children: List.generate(10, (index){
+               children: List.generate(10, (index) => Padding(
+                 padding: const EdgeInsets.all(15),
+                 child: Card(
+                       elevation: 10,
+                       shadowColor: MengoColors.mainOrange,
+                       shape: RoundedRectangleBorder(borderRadius: BorderRadius
+                           .circular(30),),
+                       child: Container(
+                         decoration: BoxDecoration(border: Border.all(
+                             color: MengoColors.mainOrange, width: 3),
+                           borderRadius: BorderRadius.circular(30),),
 
-                 return new Card(
-                 child:Container(
-                   decoration: BoxDecoration(
-                     border: Border.all(),
-                     color: Colors.white,
-                   ),
-                 child:new Text(""),
-                 )
+                       ),
 
-                 );
-             }
+
 
              ),
-
+               )
+               ),
     ),
 
     ),
