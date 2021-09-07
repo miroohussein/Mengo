@@ -78,36 +78,48 @@ class _PackagesState extends State<Packages> {
                   children: List.generate(4, (int index) => Padding(
                     padding: const EdgeInsets.all(20),
                     child: Center(
-                        child: Card(
+                        child: Stack(
 
-                          elevation: 10,
-                          shadowColor: MengoColors.mainOrange,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius
-                              .circular(30),),
+                          children:[
 
-                          child: Container(
+                           Container(width: 500,height: 500,),
+                            Card(
 
-                            decoration: BoxDecoration(border: Border.all(
-                                color: MengoColors.mainOrange, width: 3),
-                              borderRadius: BorderRadius.circular(30),),
-                                 child: Column(
-                                   children: [
-                                     Center(child: Container(width:80,height: 90, decoration: BoxDecoration(
-                                       image:DecorationImage(image: AssetImage(packagesList[index].image),fit: BoxFit.cover,),
-                                     ),)),
+                            elevation: 10,
+                            shadowColor: MengoColors.mainOrange,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius
+                                .circular(30),),
 
-                                     Padding(
-                                       padding: const EdgeInsets.all(8.0),
-                                       child: Text(packagesList[index].data,style: TextStyle(fontSize: 10),),
-                                     ),
+                            child: Container(
+
+                              decoration: BoxDecoration(border: Border.all(
+                                  color: MengoColors.mainOrange, width: 3),
+                                borderRadius: BorderRadius.circular(30),),
+                                   child: Column(
+                                     children: [
+                                       Center(child: Container(width:80,height: 90, decoration: BoxDecoration(
+                                         image:DecorationImage(image: AssetImage(packagesList[index].image),fit: BoxFit.cover,),
+                                       ),)),
+
+                                       Padding(
+                                         padding: const EdgeInsets.all(8.0),
+                                         child: Text(packagesList[index].data,style: TextStyle(fontSize: 10),),
+                                       ),
 
 
-                                   ],
-                                 ),
-                          ),
+                                     ],
+                                   ),
+                            ),
 
 
 
+                          ),  Container(
+                             margin: const EdgeInsets.only(top: 110,),
+                                child: Center(child: Text(packagesList[index].description,style: TextStyle(fontSize: 17,color: MengoColors.mainOrange,fontWeight: FontWeight.bold,),))),
+
+
+                          ],
+    ),
                         ),
 
                     ),
@@ -119,7 +131,7 @@ class _PackagesState extends State<Packages> {
 
             ),
           ),
-          ),
+
         ],
       ),
     );

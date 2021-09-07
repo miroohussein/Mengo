@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mengo/colors/colors.dart';
+import 'package:mengo/ui/login/login.dart';
 import 'package:mengo/ui/logo/logoPage.dart';
 import 'package:mengo/ui/packages/packages.dart';
 import 'package:mengo/ui/packs/packs.dart';
@@ -10,7 +11,7 @@ import 'package:mengo/ui/templates/templates.dart';
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false,
-      home: Packages()));
+      home: Login()));
 }
 
 class Mengo extends StatelessWidget {
