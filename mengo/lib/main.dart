@@ -9,12 +9,13 @@ import 'package:mengo/ui/packages/packages.dart';
 import 'package:mengo/ui/packs/packs.dart';
 import 'package:mengo/ui/profile/profile.dart';
 import 'package:mengo/ui/project/project.dart';
+import 'package:mengo/ui/subscriptions/subscriptions.dart';
 import 'package:mengo/ui/templates/templates.dart';
 
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false,
-      home: NewProject()));
+      home: Subscriptions()));
 }
 
 class Mengo extends StatelessWidget {

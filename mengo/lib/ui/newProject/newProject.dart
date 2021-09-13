@@ -12,7 +12,7 @@ class NewProject extends StatefulWidget {
 }
 
 class _NewProjectState extends State<NewProject> {
-  Object _value=1;
+  int _value=0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,7 +97,7 @@ class _NewProjectState extends State<NewProject> {
                     Row(
                       children: [
                         Radio(value: 1, groupValue: _value, onChanged:(value){setState(() {
-                          _value = value!;
+                           value=_value;
                         });},
                         ),
                         SizedBox(width: 10,),
@@ -107,8 +107,8 @@ class _NewProjectState extends State<NewProject> {
                     ),
                     Row(
                       children: [
-                        Radio(value: 1, groupValue: _value, onChanged:(value){setState(() {
-                          _value = value!;
+                        Radio(value: 2, groupValue: _value, onChanged:(value){setState(() {
+                           value=_value;
                         });},
                         ),
                         SizedBox(width: 10,),
