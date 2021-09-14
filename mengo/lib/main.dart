@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mengo/building/building.dart';
 import 'package:mengo/colors/colors.dart';
+import 'package:mengo/ui/addPage/addPage.dart';
 import 'package:mengo/ui/login/login.dart';
 import 'package:mengo/ui/logo/logoPage.dart';
 import 'package:mengo/ui/myProjects/myProjects.dart';
@@ -15,7 +16,7 @@ import 'package:mengo/ui/templates/templates.dart';
 
 void main() {
   runApp(MaterialApp(debugShowCheckedModeBanner: false,
-      home: Subscriptions()));
+      home: AddPage()));
 }
 
 class Mengo extends StatelessWidget {
