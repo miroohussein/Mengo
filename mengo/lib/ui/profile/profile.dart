@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mengo/colors/colors.dart';
+import 'package:mengo/ui/login/login.dart';
 
 
 
@@ -19,7 +20,7 @@ class _ProfileState extends State<Profile> {
         leading: IconButton(
 
           onPressed: ()
-          { },
+          { Navigator.pop(context, MaterialPageRoute(builder: (context)=>Login())); },
           icon: Icon(
             Icons.arrow_back_ios,
             color: MengoColors.mainOrange,

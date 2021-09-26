@@ -68,7 +68,7 @@ class _AddPageState extends State<AddPage> {
                 child: Container(
 
                   margin: const EdgeInsets.fromLTRB(0, 100, 0, 20),
-                       width: size.width, height: 600,
+                       width: size.width, height: 900,
                   decoration: BoxDecoration(borderRadius:BorderRadius.circular(20),color: Colors.white,border: Border.all(color:MengoColors.mainOrange,width: 4,)
 
                   ),
@@ -214,21 +214,25 @@ class _AddPageState extends State<AddPage> {
                                height: 50,
                                  width: 200,
                        decoration:BoxDecoration(
-                          color: MengoColors.mainOrange,
+                          color: color,
                             borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10),) ,
                        ),
 
 
                         ),
 
-                          Container(
 
-                            margin: const EdgeInsets.fromLTRB(0, 0, 0, 502),
-                            child: ColorPicker(pickerColor: color , onColorChanged: (color)=>setState(()=>this.color=color),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 20, 8, 2),
+                              child: Container(
+                                height: 400,
+                                child: ColorPicker(enableAlpha:false, showLabel:false,pickerColor: color , onColorChanged: (color)=>setState(()=>this.color=color,),
 
 
+                                ),
+                              ),
                             ),
-                          ),
+
 
                          ],
                        ),
