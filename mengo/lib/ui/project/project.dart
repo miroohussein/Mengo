@@ -49,15 +49,11 @@ class _ProjectState extends State<Project> {
             child: Center(
               child: Row(
                 children:[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 50),
-                        child: InkWell(onTap: (){{ showModalBottomSheet(context: context, builder:(builder)=>bottomSheet(),);}} ,
-                         child: Icon(Icons.playlist_add,color: MengoColors.mainOrange,size: 40,),),
-                      ),
+
 
                   Center(
                     child: Container(
-                    margin: const EdgeInsets.fromLTRB(0, 0, 0, 70),
+                    margin: const EdgeInsets.fromLTRB(90, 0, 0, 70),
                     width: 200,
                     height: 200,
                     decoration: BoxDecoration(
@@ -72,40 +68,91 @@ class _ProjectState extends State<Project> {
           ),
           Center(child: SingleChildScrollView(
 
-            child: Container(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 50,),
+              child: Container(
 
-              margin: const EdgeInsets.fromLTRB(0, 100, 0, 20),
-              width: 380,height: 600,
-              decoration: BoxDecoration(color: Colors.white,border: Border.all(color:MengoColors.mainOrange,width: 4,),borderRadius: BorderRadius.circular(20),
-
-              ),
-              child: GridView.count(
-
-                crossAxisCount:2,
-                children: List.generate(10, (index){
-
-                  return Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: new Card(
-                      elevation: 10,
-                      shadowColor: MengoColors.mainOrange,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30),),
-                        child:Container(
-                                decoration: BoxDecoration(border: Border.all(color: MengoColors.mainOrange,width: 3),borderRadius: BorderRadius.circular(30),),
-                          child:Padding(
-                            padding: const EdgeInsets.only(left: 15),
-                            child: new Text("First page",style: TextStyle(fontSize: 20,color: Colors.brown,fontWeight: FontWeight.bold,),),
-                          ),
-                        )
-
-                    ),
-                  );
-                }
+                margin: const EdgeInsets.fromLTRB(0, 100, 0, 20),
+                width: 340,height: 400,
+                decoration: BoxDecoration(color: Colors.white,border: Border.all(color:MengoColors.mainOrange,width: 4,),borderRadius: BorderRadius.circular(20),
 
                 ),
 
-              ),
+                child: Column(children:[
+                Padding(
+                  padding: const EdgeInsets.only(right: 5,top: 20,left: 10,),
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                         children:[Container(
+                    height: 170, width: 150,
+                    child: Card(
+                            elevation: 10,
+                            shadowColor: MengoColors.mainOrange,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
+                              child:Container(
+                                      decoration: BoxDecoration(border: Border.all(color: MengoColors.mainOrange,width: 3),borderRadius: BorderRadius.circular(10),),
+                                child:Padding(
+                                  padding: const EdgeInsets.only(left: 15),
+                                  child: new Text("First page",style: TextStyle(fontSize: 18,color: Colors.brown,fontWeight: FontWeight.bold,),),
+                                ),
+                              )
+                          ),
 
+                  ),
+                           Container(
+                             height: 170, width: 150,
+                             child: Padding(
+                               padding: const EdgeInsets.only(right: 0,),
+                               child: Card(
+                                   elevation: 10,
+                                   shadowColor: MengoColors.mainOrange,
+                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
+                                   child:Container(
+                                     decoration: BoxDecoration(border: Border.all(color: MengoColors.mainOrange,width: 3),borderRadius: BorderRadius.circular(10),),
+                                     child:Padding(
+                                       padding: const EdgeInsets.only(left: 10),
+                                       child: new Text("Second page",style: TextStyle(fontSize: 18,color: Colors.brown,fontWeight: FontWeight.bold,),),
+                                     ),
+                                   )
+                               ),
+                             ),
+
+                           ),  ],),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 140,),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      MaterialButton(
+
+                          color: MengoColors.mainOrange ,
+                          onPressed:(){},
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          child: Text("Preview app",style: TextStyle(color: Colors.white,),textAlign:TextAlign.center,)
+                      ),
+                      MaterialButton(
+
+                          color: MengoColors.mainOrange ,
+                          onPressed:(){},
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          child: Text("Templates",style: TextStyle(color: Colors.white,),textAlign:TextAlign.center,)
+                      ),
+                      MaterialButton(
+
+                          color: MengoColors.mainOrange ,
+                          onPressed:(){},
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          child: Text("Add page",style: TextStyle(color: Colors.white,),textAlign:TextAlign.center,)
+                      ),
+                    ],
+
+
+
+                  ),
+                )
+                ],  ),
+              ),
             ),
           ),
           ),
@@ -113,22 +160,7 @@ class _ProjectState extends State<Project> {
       ),
     );
   }
-  Widget bottomSheet(){
-    return Container(
-      height:150,
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
-      child: Column(
 
-        children:[ Text("Choose Profile Photo",style: TextStyle(fontSize: 20,),),
-          SizedBox(height: 20,),
-          Row(mainAxisAlignment: MainAxisAlignment.center,children: [
-            FlatButton.icon(onPressed: (){}, icon: Icon(Icons.camera), label: Text("Camera"),),
-            FlatButton.icon(onPressed: (){}, icon: Icon(Icons.image), label: Text("gallery"),),
-          ],),
-        ],),
-    );
-  }
   }
 
 

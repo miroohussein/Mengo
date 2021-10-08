@@ -1,28 +1,60 @@
-class LoginModel {
+// class LoginModel {
+//
+//  late String? name;
+//  late String? email;
+//
+//
+//   LoginModel(
+//       {
+//         required this.name,
+//         required this.email,
+//     });
+//
+//   LoginModel.fromJson(Map<String, dynamic> json) {
+//
+//     name = json['name'];
+//     email = json['email'];
+//
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//
+//     data['name'] = this.name;
+//     data['email'] = this.email;
+//
+//     return data;
+//   }
+// }
+class LoginResponseModel {
+  final String token;
+  final String error;
 
- late String name;
- late String email;
+  LoginResponseModel({required this.token, required this.error});
 
-
-  LoginModel(
-      {
-        required this.name,
-        required this.email,
-    });
-
-  LoginModel.fromJson(Map<String, dynamic> json) {
-
-    name = json['name'];
-    email = json['email'];
-
+  factory LoginResponseModel.fromJson(Map<dynamic, dynamic> json) {
+    return LoginResponseModel(
+      token: json["token"] != null ? json["token"] : "",
+      error: json["error"] != null ? json["error"] : "",
+    );
   }
+}
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+class LoginRequestModel {
+  String email;
+  String password;
 
-    data['name'] = this.name;
-    data['email'] = this.email;
+  LoginRequestModel({
+    required this.email,
+    required this.password,
+  });
 
-    return data;
+  Map<dynamic, dynamic> toJson() {
+    Map<dynamic, dynamic> map = {
+      'email': email.trim(),
+      'password': password.trim(),
+    };
+
+    return map;
   }
 }

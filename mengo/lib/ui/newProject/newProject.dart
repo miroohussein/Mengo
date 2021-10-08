@@ -1,10 +1,67 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mengo/colors/colors.dart';
+import 'package:http/http.dart' as http;
+Future<NewProjectModel> createNewProject(String name,String type ,String icon,) async {
+  try{
+    final response = await http.post(
+      Uri.parse("https://mengo1.online/application/"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'  },
+
+      body: jsonEncode(<String, dynamic>{
+        'name': name,
+        'type': type,
+        'icon': icon,
+
+      }),
+
+    );
+
+    if (response.statusCode == 201) {
+
+      return NewProjectModel.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      throw Exception('Failed to create .');
+    }
+  }
+  on SocketException {
+    throw ('internet problem');
+  }on HandshakeException {
+    throw ('second problem');
+  }on TimeoutException{
+    throw ('third problem');
 
 
+  }
+}
+class NewProjectModel {
+  late final String name;
+  late final String type;
+  late final Image icon;
+
+
+  NewProjectModel({required this.name,required this.type, required this.icon, });
+
+  factory NewProjectModel.fromJson(Map<String, dynamic> json) {
+    return NewProjectModel(
+      name: json['name'],
+      type: json['type'],
+      icon: json['icon'],
+    );
+  }
+}
 
 class NewProject extends StatefulWidget {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController typeController = TextEditingController();
+  TextEditingController iconController = TextEditingController();
 
 
   @override
@@ -12,7 +69,7 @@ class NewProject extends StatefulWidget {
 }
 
 class _NewProjectState extends State<NewProject> {
-  int _value=0;
+  String _value='1';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +120,7 @@ class _NewProjectState extends State<NewProject> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                       child: Container(
+
                         width: 200,
                         height: 200,
                         decoration: BoxDecoration(border: Border.all(width:2,color: MengoColors.mainOrange),borderRadius: BorderRadius.circular(20),),
@@ -73,31 +131,33 @@ class _NewProjectState extends State<NewProject> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 10,),
-                      child: Text("First",style: TextStyle(fontSize: 20,color: MengoColors.mainOrange),),
+                      padding: const EdgeInsets.only(top: 0,left: 70,right: 70,bottom: 0,),
+                      child: Center(child: TextFormField(decoration: InputDecoration(hintText: "First",),style: TextStyle(fontSize: 20,color: MengoColors.mainOrange),)),
                     ),
-                      Container(width: 80,height: 1,color: Colors.grey,),
+
+
 
                        Padding(
-                         padding: const EdgeInsets.fromLTRB(40, 20, 40, 0),
+                         padding: const EdgeInsets.only(left: 30,right: 30,),
                          child: TextField(
-                          decoration: InputDecoration(
+                            decoration: InputDecoration(
 
-                                fillColor: MengoColors.mainOrange,
-                            labelText: "ID",
+                                  fillColor: MengoColors.mainOrange,
+                              labelText: "Project type",
 
-                            labelStyle: TextStyle(
+                              labelStyle: TextStyle(
 
-                              color: MengoColors.mainOrange,
-                              fontSize: 20,
+                                color: MengoColors.mainOrange,
+                                fontSize: 15,
 
-                            ),),
+                              ),),
                       ),
                        ),
+
                     Row(
                       children: [
-                        Radio(value: 1, groupValue: _value, onChanged:(value){setState(() {
-                           value=_value;
+                        Radio(value: '1', groupValue: _value, onChanged:(value){setState(() {
+                          _value=value.toString();
                         });},
                         ),
                         SizedBox(width: 10,),
@@ -107,9 +167,11 @@ class _NewProjectState extends State<NewProject> {
                     ),
                     Row(
                       children: [
-                        Radio(value: 2, groupValue: _value, onChanged:(value){setState(() {
-                           value=_value;
+
+                        Radio(value: '2', groupValue: _value, onChanged:(value){setState(() {
+                          _value=value.toString();
                         });},
+
                         ),
                         SizedBox(width: 10,),
                         Text("Facebook ads")

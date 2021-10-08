@@ -1,18 +1,77 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mengo/colors/colors.dart';
 import 'package:mengo/ui/login/login.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:mengo/ui/registeration/registerationPage.dart';
+class ProfileModel {
+  late String name;
 
+  late String email;
+
+
+
+  ProfileModel({required this.name, required this.email,});
+
+  factory ProfileModel.fromJson(Map<String, dynamic> json) {
+    return ProfileModel(
+      name: json['name'],
+
+      email: json['email'],
+
+    );
+  }
+}
+
+Future<ProfileModel> updateProfile(String name,String company,String email) async {
+
+  final response = await http.put(
+    Uri.parse("http://mengo1.online/application/"),
+      headers: <String, String>{
+       HttpHeaders.authorizationHeader:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzI4MjY1MjUsImlzcyI6ImxvY2FsaG9zdCIsInVzZXJJZCI6IjI4In0.d2J5YZGfNpONjFcmHmjap3l4jfAiU8HC5H-mJKQx-BM",
+      },
+    body: jsonEncode(<String, dynamic>{
+      'name': name,
+
+      'password':email,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+
+    return ProfileModel.fromJson(jsonDecode(response.body));
+  } else {
+    // If the server did not return a 201 CREATED response,
+    // then throw an exception.
+    throw Exception('Failed to update.');
+  }
+}
 
 
 class Profile extends StatefulWidget {
-
 
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+
+
+  late final String name;
+
+  late final String email;
+
+ @override
+  void initState() {
+
+    super.initState();
+
+   var emailController=email;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,41 +121,52 @@ class _ProfileState extends State<Profile> {
                       margin: const EdgeInsets.fromLTRB(0, 100, 0, 0),
                       width:200,
                       child: TextField(
+
                         decoration: InputDecoration(
+
                           labelText: "Your name",
+                          hintText: name,
                           labelStyle: TextStyle(
                             color: MengoColors.mainOrange,
                             fontSize: 17,
 
                           ),),
+
                       ),
                     ),
                                    Container(
 
                                      width:200,
                                      child: TextField(
+
                                        decoration: InputDecoration(
                                          labelText: "Your Company",
+
                                          labelStyle: TextStyle(
                                            color: MengoColors.mainOrange,
                                            fontSize: 17,
 
                                          ),),
+
                                      ),
                                    ),
                                    Container(
 
                                      width:200,
                                      child: TextField(
+
                                        decoration: InputDecoration(
+                                         hintText: email,
                                          labelText: "Your Email",
                                          labelStyle: TextStyle(
                                            color: MengoColors.mainOrange,
                                            fontSize: 17,
 
                                          ),),
+
                                      ),
                                    ),
+
                                    Container(
                                      margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                      child: MaterialButton(
