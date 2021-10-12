@@ -38,25 +38,82 @@ class PackInfo extends StatelessWidget {
             child: SingleChildScrollView(
               child: Container(
                   margin: const EdgeInsets.fromLTRB(0, 100, 0, 20),
-                  width: 380,
-                  height: 600,
+                  width: 300,
+                  height: 490,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
                       border: Border.all(
                         color: MengoColors.mainOrange,
                         width: 4,
+
                       )),
-                  child:Card(
-                          child: Column(
-                            children: [
-                              Text(data.englishName!),
-                              Text(data.arabicName!),
-                              Text(data.projectNo!),
-                              Text(data.price!),
-                            ],
-                          ),
-                        ),
+                  child:Column(
+
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 0,top: 10,right: 70,),
+                        child: Text("Your Package:"  ,style: TextStyle(color: MengoColors.mainOrange, fontSize: 27,fontWeight: FontWeight.bold),),
+                      ),
+                      Container(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 0,top: 50,right: 70,),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(width: 15,
+                                          height: 15,
+                                          decoration: BoxDecoration(
+                                            color: MengoColors.mainOrange,
+                                            borderRadius: BorderRadius.circular(70),),),
+                                      ),
+                                      Text(data.englishName!, style: TextStyle(
+                                          color: Colors.black, fontSize: 20),),
+
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 30,bottom: 30,left: 8,right: 8),
+                                        child: Container(width: 15,
+                                          height: 15,
+                                          decoration: BoxDecoration(
+                                            color: MengoColors.mainOrange,
+                                            borderRadius: BorderRadius.circular(70),),),
+                                      ),
+                                      Text("Create "+ data.projectNo! +" apps", style: TextStyle(
+                                          color: Colors.black, fontSize: 20),),
+
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(width: 15,
+                                          height: 15,
+                                          decoration: BoxDecoration(
+                                            color: MengoColors.mainOrange,
+                                            borderRadius: BorderRadius.circular(70),),),
+                                      ),
+                                      Text('Price: ${data.price!}', style: TextStyle(
+                                          color: Colors.black, fontSize: 20),),
+
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),],
+                  ),
                       ),
             ),
           ),

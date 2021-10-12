@@ -26,7 +26,7 @@ void main() {
   HttpOverrides.global = new MyHttpOverrides();
 
   runApp(MaterialApp(debugShowCheckedModeBanner: false,
-      home: Try()));
+      home: NewProject()));
 }
 
 class Mengo extends StatelessWidget {

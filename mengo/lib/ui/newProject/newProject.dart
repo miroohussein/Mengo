@@ -2,66 +2,92 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:mengo/colors/colors.dart';
+import 'package:dio/dio.dart' as Dio;
 import 'package:http/http.dart' as http;
-Future<NewProjectModel> createNewProject(String name,String type ,String icon,) async {
-  try{
-    final response = await http.post(
-      Uri.parse("https://mengo1.online/application/"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8'  },
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mengo/colors/colors.dart';
 
-      body: jsonEncode(<String, dynamic>{
-        'name': name,
-        'type': type,
-        'icon': icon,
+import 'package:json_annotation/json_annotation.dart';
 
-      }),
 
-    );
+// Future create(
+// File image , String projectType,String projectName,int ad)async{
+//   var imageServer;
+//   if (image!=null){
+//     imageServer=await Dio.MultipartFile.fromFileSync(image.path,filename:image.path.split('/').last,);
+//   }
+//   try{
+//     Dio.Response response=await dio().post('http://mengo1.online/application/createProject.php',
+//     data:Dio.FormData.fromMap({
+//       "name":"$projectName",
+//       "type":"$projectType",
+//       "icon":imageServer,
+//       "ad":"$ad",
+//     }),
+//     options:Dio.Options(
+//       headers: {
+//         'content-Type': 'application/json',
+//         'Accept': 'application/json',
+//         'Authorization': 'bearer $token' ,
+//       },
+//     ),
+//     );
+//     print(response.data);
+//     if(response.data['status']==400) {
+//       throw HttpException('error');
+//     }
+//     if
+//     }
+//   }
+// }
+// )
+class CreateModel {
+  String? name;
+  String? type;
+  File? icon;
+  int? ad;
 
-    if (response.statusCode == 201) {
+  CreateModel({this.name, this.type,this.icon,this.ad});
 
-      return NewProjectModel.fromJson(jsonDecode(response.body));
-    } else {
-      // If the server did not return a 201 CREATED response,
-      // then throw an exception.
-      throw Exception('Failed to create .');
-    }
+  CreateModel.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    type = json['type'];
+    type = json['icon'];
+    type = json['ad'];
   }
-  on SocketException {
-    throw ('internet problem');
-  }on HandshakeException {
-    throw ('second problem');
-  }on TimeoutException{
-    throw ('third problem');
 
-
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['type'] = this.type;
+    data['icon'] = this.icon;
+    data['ad'] = this.ad;
+    return data;
   }
 }
-class NewProjectModel {
-  late final String name;
-  late final String type;
-  late final Image icon;
-
-
-  NewProjectModel({required this.name,required this.type, required this.icon, });
-
-  factory NewProjectModel.fromJson(Map<String, dynamic> json) {
-    return NewProjectModel(
-      name: json['name'],
-      type: json['type'],
-      icon: json['icon'],
-    );
-  }
-}
+// Future<CreateModel> multiRequest(String url,Map<String,String>body,{File?image,required String key}) async {
+//   const String url = 'http://mengo1.online/application/userProjectsData.php';
+//
+//
+//   var request = http.MultipartRequest("POST", Uri.parse(url));
+//
+//
+//     request.files.add(await http.MultipartFile.fromPath(key, image!.path));
+//     request.fields[key] = 'name';
+//     request.fields[key] = 'type';
+//     request.fields[key] = 'ad';
+//   var response = await request.send();
+//   if (response.statusCode == 200) print('Uploaded!');
+//   }
+//
+// }
 
 class NewProject extends StatefulWidget {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController typeController = TextEditingController();
-  TextEditingController iconController = TextEditingController();
+
+
 
 
   @override
@@ -69,7 +95,27 @@ class NewProject extends StatefulWidget {
 }
 
 class _NewProjectState extends State<NewProject> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController typeController = TextEditingController();
   String _value='1';
+
+
+
+File? image;
+ Future pickImage(ImageSource source)async{
+   try{
+  final image =await ImagePicker().pickImage(source: source);
+
+
+  if (image==null) return ;
+  final imageTemporary=File(image.path);
+  setState(() => this.image=imageTemporary);
+  }on PlatformException catch (e){
+    print('failed to pick image:$e');
+  }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,15 +170,17 @@ class _NewProjectState extends State<NewProject> {
                         width: 200,
                         height: 200,
                         decoration: BoxDecoration(border: Border.all(width:2,color: MengoColors.mainOrange),borderRadius: BorderRadius.circular(20),),
-                          child: Image.asset(
-                            "assets/dog.png",fit: BoxFit.cover,
+                          child: Center(
+                            child: ProjectIcon(),
                           ),
 
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 0,left: 70,right: 70,bottom: 0,),
-                      child: Center(child: TextFormField(decoration: InputDecoration(hintText: "First",),style: TextStyle(fontSize: 20,color: MengoColors.mainOrange),)),
+                      child: Center(child: TextFormField(
+                        controller: nameController,
+                        decoration: InputDecoration(hintText: "Project name",),style: TextStyle(fontSize: 15,color: MengoColors.mainOrange),)),
                     ),
 
 
@@ -140,6 +188,7 @@ class _NewProjectState extends State<NewProject> {
                        Padding(
                          padding: const EdgeInsets.only(left: 30,right: 30,),
                          child: TextField(
+                           controller: typeController,
                             decoration: InputDecoration(
 
                                   fillColor: MengoColors.mainOrange,
@@ -187,6 +236,46 @@ class _NewProjectState extends State<NewProject> {
 
     );
   }
+  Widget ProjectIcon(){
+    return Center(
+      child: Stack(
+        children: [
+          Positioned(
+            child: InkWell(onTap: (){ showModalBottomSheet(context: context, builder:(builder)=>bottomSheet(),);},
+              child:Container(
+                child: Center(
+                  child: image!=null?Image.file(image!,fit: BoxFit.cover,) : Container(
+                    width: 200,height: 200,
 
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/dog.png"),
+                          fit: BoxFit.cover),
+                    ),),
+                ),),
+              ),),
+        ],
+
+      ),
+    );
+
+
+  }
+  Widget bottomSheet(){
+    return Container(
+      height:150,
+      width: MediaQuery.of(context).size.width,
+      margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20,),
+      child: Column(
+
+        children:[ Text("Choose project icon",style: TextStyle(fontSize: 20,),),
+          SizedBox(height: 20,),
+          Row(mainAxisAlignment: MainAxisAlignment.center,children: [
+            FlatButton.icon(onPressed: (){pickImage(ImageSource.camera);}, icon: Icon(Icons.camera), label: Text("Camera"),),
+            FlatButton.icon(onPressed: (){}, icon: Icon(Icons.image), label: Text("gallery"),),
+          ],),
+        ],),
+    );
+  }
 
 }
